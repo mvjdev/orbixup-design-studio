@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X, Zap, User } from "lucide-react";
 import { Button } from "./ui/button";
+import AuthModal from "./AuthModal";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<"signin" | "signup">("signin");
 
   const navItems = [
     { label: "Services", href: "#services" },
@@ -37,10 +40,27 @@ const Header = () => {
             ))}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Button className="btn-accent">
-              Commencer un projet
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center gap-3">
+            <Button 
+              variant="ghost" 
+              className="text-white/90 hover:text-white hover:bg-white/10 transition-colors"
+              onClick={() => {
+                setAuthMode("signin");
+                setIsAuthModalOpen(true);
+              }}
+            >
+              <User className="w-4 h-4 mr-2" />
+              Connexion
+            </Button>
+            <Button 
+              className="btn-accent"
+              onClick={() => {
+                setAuthMode("signup");
+                setIsAuthModalOpen(true);
+              }}
+            >
+              Commencer
             </Button>
           </div>
 
@@ -67,13 +87,41 @@ const Header = () => {
                   {item.label}
                 </a>
               ))}
-              <Button className="btn-accent mt-4 w-full">
-                Commencer un projet
-              </Button>
+              <div className="space-y-3 mt-4">
+                <Button 
+                  variant="ghost" 
+                  className="w-full text-white/90 hover:text-white hover:bg-white/10 justify-start"
+                  onClick={() => {
+                    setAuthMode("signin");
+                    setIsAuthModalOpen(true);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  <User className="w-4 h-4 mr-2" />
+                  Connexion
+                </Button>
+                <Button 
+                  className="btn-accent w-full"
+                  onClick={() => {
+                    setAuthMode("signup");
+                    setIsAuthModalOpen(true);
+                    setIsMenuOpen(false);
+                  }}
+                >
+                  Commencer
+                </Button>
+              </div>
             </nav>
           </div>
         )}
       </div>
+
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+        initialMode={authMode}
+      />
     </header>
   );
 };
