@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { X } from "lucide-react";
-import { Dialog, DialogContent } from "./ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "./ui/dialog";
+import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import { Button } from "./ui/button";
 import SignIn from "./SignIn";
 import SignUp from "./SignUp";
@@ -17,6 +18,11 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }: AuthModalProps) 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[500px] w-[95vw] max-h-[95vh] overflow-y-auto bg-background/95 backdrop-blur-md border border-border/50 rounded-2xl p-0">
+        <VisuallyHidden>
+          <DialogTitle>
+            {mode === "signin" ? "Se connecter" : "Créer un compte"}
+          </DialogTitle>
+        </VisuallyHidden>
         <div className="relative">
           {/* Close Button */}
           <button
