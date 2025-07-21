@@ -39,9 +39,9 @@
     --input: 225 20% 90%;
     --ring: 225 45% 20%;
 
-    /* Premium Gradients - Bleu doux */
+    /* Premium Gradients - Très doux */
     --gradient-primary: linear-gradient(135deg, hsl(210 60% 45%), hsl(210 40% 55%));
-    --gradient-hero: linear-gradient(135deg, hsl(210 70% 35%), hsl(210 50% 45%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 30% 25%), hsl(210 40% 35%));
     --gradient-accent: linear-gradient(135deg, hsl(210 50% 50%), hsl(210 60% 60%));
     --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 20% 98%));
 
