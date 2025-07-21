@@ -16,17 +16,17 @@
     --popover: 0 0% 100%;
     --popover-foreground: 225 25% 15%;
 
-    /* Primary - Deep Professional Blue */
-    --primary: 225 45% 20%;
+    /* Primary - Deep Premium Blue */
+    --primary: 210 100% 35%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 225 60% 50%;
+    --primary-glow: 210 100% 50%;
 
-    /* Secondary - Premium Purple */
-    --secondary: 260 60% 25%;
+    /* Secondary - Lighter Blue */
+    --secondary: 210 80% 45%;
     --secondary-foreground: 0 0% 100%;
 
-    /* Accent - Vibrant Highlight */
-    --accent: 245 80% 60%;
+    /* Accent - Bright Blue */
+    --accent: 210 100% 60%;
     --accent-foreground: 0 0% 100%;
 
     --muted: 225 10% 96%;
@@ -39,16 +39,16 @@
     --input: 225 20% 90%;
     --ring: 225 45% 20%;
 
-    /* Premium Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(225 45% 20%), hsl(260 60% 25%));
-    --gradient-hero: linear-gradient(135deg, hsl(225 60% 15%), hsl(260 70% 20%));
-    --gradient-accent: linear-gradient(135deg, hsl(245 80% 60%), hsl(260 70% 50%));
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(225 30% 98%));
+    /* Premium Gradients - Blue Theme */
+    --gradient-primary: linear-gradient(135deg, hsl(210 100% 35%), hsl(210 80% 45%));
+    --gradient-hero: linear-gradient(135deg, hsl(210 90% 25%), hsl(210 100% 35%));
+    --gradient-accent: linear-gradient(135deg, hsl(210 100% 60%), hsl(210 80% 50%));
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%), hsl(210 30% 98%));
 
-    /* Premium Shadows */
-    --shadow-premium: 0 20px 40px -10px hsl(225 45% 20% / 0.15);
-    --shadow-glow: 0 0 40px hsl(245 80% 60% / 0.3);
-    --shadow-card: 0 10px 30px -5px hsl(225 20% 60% / 0.1);
+    /* Premium Shadows - Blue Theme */
+    --shadow-premium: 0 20px 40px -10px hsl(210 100% 35% / 0.15);
+    --shadow-glow: 0 0 40px hsl(210 100% 60% / 0.3);
+    --shadow-card: 0 10px 30px -5px hsl(210 20% 60% / 0.1);
 
     /* Animations */
     --transition-premium: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -134,7 +134,7 @@
   }
 
   .btn-accent {
-    @apply bg-gradient-to-r from-accent to-purple-500 text-white font-semibold px-6 py-3 rounded-lg;
+    @apply bg-gradient-to-r from-accent to-primary-glow text-white font-semibold px-6 py-3 rounded-lg;
     @apply shadow-[var(--shadow-card)] hover:shadow-[var(--shadow-glow)];
     @apply transition-[var(--transition-smooth)] hover:scale-105;
   }

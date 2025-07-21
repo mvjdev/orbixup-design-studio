@@ -4,16 +4,11 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-interface SignInProps {
-  onToggle: () => void;
-}
-
-const SignIn = ({ onToggle }: SignInProps) => {
+const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: "",
-    password: "",
-    rememberMe: false
+    password: ""
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -79,20 +74,11 @@ const SignIn = ({ onToggle }: SignInProps) => {
           </div>
         </div>
 
-        {/* Remember Me & Forgot Password */}
-        <div className="flex items-center justify-between text-sm">
-          <label className="flex items-center gap-2 cursor-pointer">
-            <input
-              type="checkbox"
-              checked={formData.rememberMe}
-              onChange={(e) => setFormData(prev => ({ ...prev, rememberMe: e.target.checked }))}
-              className="w-4 h-4 text-primary border-border/50 rounded focus:ring-primary/20"
-            />
-            <span className="text-muted-foreground">Se souvenir de moi</span>
-          </label>
+        {/* Forgot Password */}
+        <div className="text-right">
           <a 
             href="#forgot" 
-            className="text-primary hover:text-primary/80 transition-colors font-medium"
+            className="text-primary hover:text-primary/80 transition-colors font-medium text-sm"
           >
             Mot de passe oublié ?
           </a>
@@ -134,18 +120,6 @@ const SignIn = ({ onToggle }: SignInProps) => {
         </div>
       </form>
 
-      {/* Toggle to Sign Up */}
-      <div className="text-center mt-8 pt-6 border-t border-border/50">
-        <p className="text-muted-foreground text-sm md:text-base">
-          Pas encore de compte ?{" "}
-          <button 
-            onClick={onToggle}
-            className="text-primary hover:text-primary/80 transition-colors font-semibold"
-          >
-            Créer un compte
-          </button>
-        </p>
-      </div>
     </div>
   );
 };
