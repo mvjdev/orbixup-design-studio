@@ -17,20 +17,13 @@ const AuthModal = ({ isOpen, onClose, initialMode = "signin" }: AuthModalProps) 
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-[500px] w-[95vw] max-h-[95vh] overflow-y-auto bg-background/95 backdrop-blur-md border border-border/50 rounded-2xl p-0">
+      <DialogContent className="sm:max-w-[500px] w-[95vw] max-h-[95vh] overflow-y-auto bg-background/95 backdrop-blur-md border border-border/50 rounded-2xl p-0 [&>button]:right-4 [&>button]:top-4 [&>button]:w-8 [&>button]:h-8 [&>button]:rounded-full [&>button]:bg-muted/80 [&>button]:hover:bg-muted [&>button]:opacity-100">
         <VisuallyHidden>
           <DialogTitle>
             {mode === "signin" ? "Se connecter" : "Créer un compte"}
           </DialogTitle>
         </VisuallyHidden>
         <div className="relative">
-          {/* Close Button */}
-          <button
-            onClick={onClose}
-            className="absolute right-4 top-4 z-10 w-8 h-8 rounded-full bg-muted/80 hover:bg-muted transition-colors flex items-center justify-center"
-          >
-            <X className="w-4 h-4 text-muted-foreground" />
-          </button>
 
           {/* Toggle Buttons */}
           <div className="p-6 pb-0">
