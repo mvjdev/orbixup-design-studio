@@ -1,270 +1,215 @@
 import { useState } from "react";
-import { Eye, EyeOff, User, Mail, Lock, Phone, ArrowRight, ArrowLeft } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, User, Building } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-const SignUp = () => {
-  const [currentStep, setCurrentStep] = useState(1);
+interface SignUpProps {
+  onToggle: () => void;
+}
+
+const SignUp = ({ onToggle }: SignUpProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    company: "",
     email: "",
-    phone: "",
-    fullName: "",
-    username: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    acceptTerms: false
   });
 
-  const handleNext = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (currentStep < 2) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      // Handle sign up logic here
-      console.log("Sign up:", formData);
-    }
-  };
-
-  const handleBack = () => {
-    setCurrentStep(currentStep - 1);
+    // Handle sign up logic here
+    console.log("Sign up:", formData);
   };
 
   return (
     <div className="w-full max-w-md mx-auto">
-      <div className="text-center mb-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-          Créer un compte
+      <div className="text-center mb-8">
+        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-3">
+          Rejoignez Orbixup
         </h2>
-        <p className="text-muted-foreground text-sm">
-          Rejoignez Orbixup et accédez à nos services premium
+        <p className="text-muted-foreground text-sm md:text-base">
+          Créez votre compte et transformez votre vision
         </p>
       </div>
 
-      {/* Step Indicator */}
-      <div className="flex items-center justify-center mb-8">
-        <div className="flex items-center space-x-4">
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
-            currentStep >= 1 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-          }`}>
-            1
+      <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Name Fields */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <Label htmlFor="firstName" className="text-sm font-medium text-foreground">
+              Prénom
+            </Label>
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                id="firstName"
+                type="text"
+                placeholder="John"
+                value={formData.firstName}
+                onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                className="pl-9 h-11 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
+                required
+              />
+            </div>
           </div>
-          <div className={`w-8 h-1 rounded-full transition-colors ${
-            currentStep >= 2 ? "bg-primary" : "bg-muted"
-          }`}></div>
-          <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors ${
-            currentStep >= 2 ? "bg-primary text-primary-foreground" : "bg-muted text-muted-foreground"
-          }`}>
-            2
+          <div className="space-y-2">
+            <Label htmlFor="lastName" className="text-sm font-medium text-foreground">
+              Nom
+            </Label>
+            <div className="relative">
+              <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                id="lastName"
+                type="text"
+                placeholder="Doe"
+                value={formData.lastName}
+                onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                className="pl-9 h-11 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
+                required
+              />
+            </div>
           </div>
         </div>
-      </div>
 
-      <form onSubmit={handleNext} className="space-y-6">
-        {currentStep === 1 && (
-          <>
-            {/* Step 1: Personal Info */}
-            <div className="space-y-4">
-              {/* Email Field */}
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium text-foreground">
-                  Adresse email *
-                </Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="votre@email.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="pl-10 h-12 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* Phone Field */}
-              <div className="space-y-2">
-                <Label htmlFor="phone" className="text-sm font-medium text-foreground">
-                  Numéro de téléphone *
-                </Label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    id="phone"
-                    type="tel"
-                    placeholder="+33 6 12 34 56 78"
-                    value={formData.phone}
-                    onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                    className="pl-10 h-12 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* Full Name Field */}
-              <div className="space-y-2">
-                <Label htmlFor="fullName" className="text-sm font-medium text-foreground">
-                  Nom complet *
-                </Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    id="fullName"
-                    type="text"
-                    placeholder="Votre nom complet"
-                    value={formData.fullName}
-                    onChange={(e) => setFormData(prev => ({ ...prev, fullName: e.target.value }))}
-                    className="pl-10 h-12 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
-                    required
-                  />
-                </div>
-              </div>
-
-              {/* Username Field */}
-              <div className="space-y-2">
-                <Label htmlFor="username" className="text-sm font-medium text-foreground">
-                  Nom d'utilisateur *
-                </Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    id="username"
-                    type="text"
-                    placeholder="votre_nom_utilisateur"
-                    value={formData.username}
-                    onChange={(e) => setFormData(prev => ({ ...prev, username: e.target.value }))}
-                    className="pl-10 h-12 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
-                    required
-                  />
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-
-        {currentStep === 2 && (
-          <>
-            {/* Step 2: Security */}
-            <div className="space-y-4">
-              {/* Password Field */}
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium text-foreground">
-                  Mot de passe *
-                </Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    id="password"
-                    type={showPassword ? "text" : "password"}
-                    placeholder="••••••••"
-                    value={formData.password}
-                    onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
-                    className="pl-10 pr-10 h-12 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                  </button>
-                </div>
-              </div>
-
-              {/* Confirm Password Field */}
-              <div className="space-y-2">
-                <Label htmlFor="confirmPassword" className="text-sm font-medium text-foreground">
-                  Confirmer le mot de passe *
-                </Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <Input
-                    id="confirmPassword"
-                    type={showConfirmPassword ? "text" : "password"}
-                    placeholder="••••••••"
-                    value={formData.confirmPassword}
-                    onChange={(e) => setFormData(prev => ({ ...prev, confirmPassword: e.target.value }))}
-                    className="pl-10 pr-10 h-12 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
-                  >
-                    {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                  </button>
-                </div>
-              </div>
-
-              {/* Terms & Conditions */}
-              <div className="flex items-start gap-3 text-sm pt-4">
-                <input
-                  type="checkbox"
-                  id="acceptTerms"
-                  className="w-4 h-4 text-primary border-border/50 rounded focus:ring-primary/20 mt-0.5"
-                  required
-                />
-                <label htmlFor="acceptTerms" className="text-muted-foreground leading-relaxed">
-                  J'accepte les{" "}
-                  <a href="#terms" className="text-primary hover:text-primary/80 transition-colors font-medium">
-                    conditions d'utilisation
-                  </a>{" "}
-                  et la{" "}
-                  <a href="#privacy" className="text-primary hover:text-primary/80 transition-colors font-medium">
-                    politique de confidentialité
-                  </a>
-                </label>
-              </div>
-            </div>
-          </>
-        )}
-
-        {/* Navigation Buttons */}
-        <div className="flex gap-3 pt-4">
-          {currentStep > 1 && (
-            <Button 
-              type="button"
-              variant="outline"
-              onClick={handleBack}
-              className="flex-1 h-12 bg-background/50 border-border/50 hover:bg-muted/50"
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Retour
-            </Button>
-          )}
-          <Button 
-            type="submit" 
-            className={`h-12 btn-premium text-base font-semibold ${currentStep === 1 ? 'w-full' : 'flex-1'}`}
-          >
-            {currentStep === 1 ? (
-              <>
-                Suivant
-                <ArrowRight className="w-4 h-4 ml-2" />
-              </>
-            ) : (
-              "Créer mon compte"
-            )}
-          </Button>
+        {/* Company Field */}
+        <div className="space-y-2">
+          <Label htmlFor="company" className="text-sm font-medium text-foreground">
+            Entreprise
+          </Label>
+          <div className="relative">
+            <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              id="company"
+              type="text"
+              placeholder="Votre entreprise"
+              value={formData.company}
+              onChange={(e) => setFormData(prev => ({ ...prev, company: e.target.value }))}
+              className="pl-9 h-11 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
+            />
+          </div>
         </div>
-      </form>
 
-      {/* Social Login for step 2 */}
-      {currentStep === 2 && (
-        <>
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-border/50"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-background text-muted-foreground">ou</span>
+        {/* Email Field */}
+        <div className="space-y-2">
+          <Label htmlFor="email" className="text-sm font-medium text-foreground">
+            Adresse email
+          </Label>
+          <div className="relative">
+            <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <Input
+              id="email"
+              type="email"
+              placeholder="votre@email.com"
+              value={formData.email}
+              onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+              className="pl-9 h-11 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
+              required
+            />
+          </div>
+        </div>
+
+        {/* Password Fields */}
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="password" className="text-sm font-medium text-foreground">
+              Mot de passe
+            </Label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                placeholder="••••••••"
+                value={formData.password}
+                onChange={(e) => setFormData(prev => ({ ...prev, password: e.target.value }))}
+                className="pl-9 pr-10 h-11 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
             </div>
           </div>
 
+          <div className="space-y-2">
+            <Label htmlFor="confirmPassword" className="text-sm font-medium text-foreground">
+              Confirmer le mot de passe
+            </Label>
+            <div className="relative">
+              <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+              <Input
+                id="confirmPassword"
+                type={showConfirmPassword ? "text" : "password"}
+                placeholder="••••••••"
+                value={formData.confirmPassword}
+                onChange={(e) => setFormData(prev => ({ ...prev, confirmPassword: e.target.value }))}
+                className="pl-9 pr-10 h-11 bg-background/50 border-border/50 focus:border-primary focus:ring-primary/20"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {showConfirmPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Terms Checkbox */}
+        <div className="space-y-4">
+          <label className="flex items-start gap-3 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={formData.acceptTerms}
+              onChange={(e) => setFormData(prev => ({ ...prev, acceptTerms: e.target.checked }))}
+              className="w-4 h-4 mt-0.5 text-primary border-border/50 rounded focus:ring-primary/20"
+              required
+            />
+            <span className="text-sm text-muted-foreground leading-relaxed">
+              J'accepte les{" "}
+              <a href="#terms" className="text-primary hover:text-primary/80 transition-colors">
+                conditions d'utilisation
+              </a>{" "}
+              et la{" "}
+              <a href="#privacy" className="text-primary hover:text-primary/80 transition-colors">
+                politique de confidentialité
+              </a>
+            </span>
+          </label>
+        </div>
+
+        {/* Submit Button */}
+        <Button 
+          type="submit" 
+          className="w-full h-12 btn-premium text-base font-semibold"
+        >
+          Créer mon compte
+        </Button>
+
+        {/* Divider */}
+        <div className="relative my-6">
+          <div className="absolute inset-0 flex items-center">
+            <div className="w-full border-t border-border/50"></div>
+          </div>
+          <div className="relative flex justify-center text-sm">
+            <span className="px-4 bg-background text-muted-foreground">ou</span>
+          </div>
+        </div>
+
+        {/* Social Login */}
+        <div className="space-y-3">
           <Button 
             type="button" 
             variant="outline" 
@@ -278,8 +223,21 @@ const SignUp = () => {
             </svg>
             Continuer avec Google
           </Button>
-        </>
-      )}
+        </div>
+      </form>
+
+      {/* Toggle to Sign In */}
+      <div className="text-center mt-8 pt-6 border-t border-border/50">
+        <p className="text-muted-foreground text-sm md:text-base">
+          Déjà un compte ?{" "}
+          <button 
+            onClick={onToggle}
+            className="text-primary hover:text-primary/80 transition-colors font-semibold"
+          >
+            Se connecter
+          </button>
+        </p>
+      </div>
     </div>
   );
 };
