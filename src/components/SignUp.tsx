@@ -4,11 +4,7 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
-interface SignUpProps {
-  onToggle: () => void;
-}
-
-const SignUp = ({ onToggle }: SignUpProps) => {
+const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -226,18 +222,6 @@ const SignUp = ({ onToggle }: SignUpProps) => {
         </div>
       </form>
 
-      {/* Toggle to Sign In */}
-      <div className="text-center mt-8 pt-6 border-t border-border/50">
-        <p className="text-muted-foreground text-sm md:text-base">
-          Déjà un compte ?{" "}
-          <button 
-            onClick={onToggle}
-            className="text-primary hover:text-primary/80 transition-colors font-semibold"
-          >
-            Se connecter
-          </button>
-        </p>
-      </div>
     </div>
   );
 };

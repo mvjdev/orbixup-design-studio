@@ -5,6 +5,20 @@ import { Card } from "./ui/card";
 const Pricing = () => {
   const plans = [
     {
+      name: "Gratuit",
+      price: "0€",
+      description: "Parfait pour découvrir nos outils",
+      features: [
+        "10 tokens par jour",
+        "Outils de base",
+        "Support communautaire",
+        "Filigrane sur exports"
+      ],
+      popular: false,
+      buttonVariant: "outline" as const,
+      free: true
+    },
+    {
       name: "Essentiel",
       price: "299€",
       description: "Parfait pour démarrer avec style",
@@ -16,7 +30,8 @@ const Pricing = () => {
         "Livraison 5 jours"
       ],
       popular: false,
-      buttonVariant: "outline" as const
+      buttonVariant: "outline" as const,
+      free: false
     },
     {
       name: "Premium",
@@ -32,7 +47,8 @@ const Pricing = () => {
         "Livraison 3 jours"
       ],
       popular: true,
-      buttonVariant: "default" as const
+      buttonVariant: "default" as const,
+      free: false
     },
     {
       name: "Enterprise",
@@ -50,7 +66,8 @@ const Pricing = () => {
         "Support prioritaire"
       ],
       popular: false,
-      buttonVariant: "secondary" as const
+      buttonVariant: "secondary" as const,
+      free: false
     }
   ];
 
@@ -114,7 +131,7 @@ const Pricing = () => {
                 variant={plan.popular ? undefined : plan.buttonVariant}
               >
                 {plan.popular && <Zap className="mr-2 w-4 h-4" />}
-                Choisir ce pack
+                {plan.free ? 'Commencer gratuitement' : 'Choisir ce pack'}
               </Button>
             </Card>
           ))}
