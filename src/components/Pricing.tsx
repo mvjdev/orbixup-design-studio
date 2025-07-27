@@ -19,25 +19,11 @@ const Pricing = () => {
       free: true
     },
     {
-      name: "Essentiel",
-      price: "299€",
-      description: "Parfait pour démarrer avec style",
-      features: [
-        "1 logo professionnel",
-        "3 concepts initiaux", 
-        "3 révisions incluses",
-        "Fichiers PNG/JPG HD",
-        "Livraison 5 jours"
-      ],
-      popular: false,
-      buttonVariant: "outline" as const,
-      free: false
-    },
-    {
       name: "Premium",
       price: "599€",
       description: "Notre pack le plus populaire",
       features: [
+        "1000 tokens par mois",
         "Logo + 3 variations",
         "Concepts illimités",
         "Révisions illimitées",
@@ -55,6 +41,7 @@ const Pricing = () => {
       price: "1299€",
       description: "Solution complète pour entreprises",
       features: [
+        "Tokens illimités",
         "Identité visuelle complète",
         "Logo + déclinaisons",
         "Charte graphique détaillée",
